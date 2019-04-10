@@ -17,5 +17,4 @@ export default ({
     {...props}>
     {!isLoading ? text : loadingText}
     {isLoading &&  <Spinner size="sm" color="secondary" /> }
-    {console.log(isLoading)}
   </Button>;

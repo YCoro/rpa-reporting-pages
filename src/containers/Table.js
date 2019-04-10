@@ -6,7 +6,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CustomModal from '../components/CustomModal';
 import {Button} from 'reactstrap';
-
+import Forbidden from './Forbidden';
+import Config from "../Config"
 
 
 const TableHeader = () => {
@@ -59,21 +60,24 @@ class CustomTable extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:5000/bitacora")
+    fetch(Config.API+"bitacora")
       .then(response => response.json())
       .then(data =>
         this.setState({logs:data.data})
         ).catch(err => {
-          throw new Error(err)
+          console.log(err);
+          this.setState({logs:[]})
         });
   }
 
   render() {
     return (
-      <Table >
-        <TableHeader />
-        <CustomTableBody rows={this.state.logs}/>
-      </Table>
+      this.props.isAuthenticated?
+        <Table >
+          <TableHeader />
+          <CustomTableBody rows={this.state.logs}/>
+        </Table>
+      : <Forbidden />
     )
   }
 }

@@ -31,7 +31,7 @@ class CustomModal extends React.Component {
                 <Col xs={{ size: 'auto' }}>  <img src={sc} alt='Screenshot' /></Col>
               </Row>
               <Row style={{marginTop:'32px'}}>
-                <Col xs={{ size: 'auto', offset: 2 }}><h4> {this.props.errorText}</h4> </Col>
+                <Col xs={{ size: 'auto'}}><h4> {this.props.errorText}</h4> </Col>
               </Row>
             </Container>
           </ModalBody>
