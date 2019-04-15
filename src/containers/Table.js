@@ -23,29 +23,11 @@ const TableHeader = () => {
     </TableHead>
   )
 }
-function CustomTableBody (props) {
-  props.rows.map((r) => (console.log(r)));
-  return (
-    <TableBody>
-    {props.rows.map(row => (
-            <TableRow key={row.BitacoraID}>
-            <TableCell align="left">{row.BitacoraID}</TableCell>
-              <TableCell component="th" scope="row" align="center">
-                {row.Nombre_Proceso}
-              </TableCell>
-              <TableCell align="center">{row.Log_Message}</TableCell>
-              <TableCell align="center">{row.Status === 1? <Button color="success" style={{cursor:'default'}}> Success </Button>:
-                <CustomModal title={row.Log_Message} imagePath={row.Path_Image} errorText={row.Error}/>}</TableCell>
-              <TableCell align="center">{row.Create_Time}</TableCell>
-            </TableRow>
-          ))}
-          </TableBody>
-  )
-}
 
 class CustomTable extends Component {
   constructor(props) {
     super(props);
+    console.log(props)
 
     this.state = {
       logs: [],
@@ -58,24 +40,36 @@ class CustomTable extends Component {
       modal: !prevState.modal
     }));
   }
-
-  componentDidMount() {
+  componentDidMount(){
     fetch(Config.API+"bitacora")
       .then(response => response.json())
-      .then(data =>
+      .then(data =>{
+        console.log(data)
         this.setState({logs:data.data})
-        ).catch(err => {
+      }).catch(err => {
           console.log(err);
           this.setState({logs:[]})
         });
   }
-
   render() {
     return (
       this.props.isAuthenticated?
         <Table >
           <TableHeader />
-          <CustomTableBody rows={this.state.logs}/>
+          <TableBody>
+          {this.state.logs.map(row => (
+                  <TableRow key={row.BitacoraID}>
+                  <TableCell align="left">{row.BitacoraID}</TableCell>
+                    <TableCell component="th" scope="row" align="center">
+                      {row.Nombre_Proceso}
+                    </TableCell>
+                    <TableCell align="center">{row.Log_Message}</TableCell>
+                    <TableCell align="center">{row.Status === 1? <Button color="success" style={{cursor:'default'}}> Success </Button>:
+                      <CustomModal title={row.Log_Message} imagePath={row.Path_Image} errorText={row.Error}/>}</TableCell>
+                    <TableCell align="center">{row.Create_Time}</TableCell>
+                  </TableRow>
+                ))}
+                </TableBody>
         </Table>
       : <Forbidden />
     )

@@ -21,6 +21,8 @@ export default class Example extends Component {
   handleLogout = async  event => {
     this.props.userHasAuthenticated(false);
   }
+  
+
   render() {
     return (
       <div>
@@ -32,12 +34,12 @@ export default class Example extends Component {
           <Collapse isOpen={!this.state.collapsed} navbar>
           {this.props.isAuthenticated
             ? <Nav navbar>
-                <NavItem onClick={this.handleLogout}>
-                  <LinkContainer to="/report" style={{cursor:'pointer'}}>
+                <NavItem onClick={this.toggleNavbar}>
+                  <LinkContainer to="/report"  style={{cursor:'pointer'}}>
                     <h6> Reporte RPA </h6>
                   </LinkContainer>
                 </NavItem>
-                <NavItem onClick={this.toggleNavbar}>
+                <NavItem onClick={this.handleLogout}>
                   <LinkContainer to="/login" style={{cursor:'pointer'}}>
                     <h6 > Log out </h6>
                   </LinkContainer>

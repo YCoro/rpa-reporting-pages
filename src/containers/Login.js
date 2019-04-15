@@ -26,7 +26,7 @@ export default class Login extends Component {
     });
   }
 
-  handleSubmit = async event => {
+  handleSubmit = event => {
     event.preventDefault();
     this.setState(state => ({
       isLoading: !state.isLoading
@@ -53,7 +53,6 @@ export default class Login extends Component {
           this.props.history.push("/report")
          }
         ).catch(err => {
-          console.log(err)
           this.setState({isLoading:false})
         });
   }
