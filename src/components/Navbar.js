@@ -21,14 +21,14 @@ export default class Example extends Component {
   handleLogout = async  event => {
     this.props.userHasAuthenticated(false);
   }
-  
+
 
   render() {
     return (
       <div>
         <Navbar color="faded" dark style={{backgroundColor: '#ffffff'}} >
         <LinkContainer to="/" style={{cursor:'pointer'}}>
-          <img src="http://www.bdgsa.net/images/LOGO_BDG-01.png" alt="BDG" />
+          <img src="http://www.bdgsa.net/images/LOGO_BDG-01.png" alt="BDG" onClick={this.state.collapsed? null:this.toggleNavbar} />
           </LinkContainer>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" style={{backgroundColor: '#BD1823'}} />
           <Collapse isOpen={!this.state.collapsed} navbar>
